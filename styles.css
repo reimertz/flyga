@@ -7,7 +7,85 @@
   }
 }
 
+nav {
+  background-color: #222;
+  margin-top: 5vh;
+  z-index: 1;
+}
+
+
 main {
   animation-name: fadeIn;
   animation-duration: 500ms;
+}
+
+html, body {
+  display: flex; flex-direction: column; align-items: center;
+  font-family: Menlo !important;
+  font-size: 16px;
+  color: white;
+  position: relative;
+  z-index: 0;
+}
+
+a, a:visited {
+  color: white;
+}
+
+u > a, u > a:visited {
+  color: #222;
+}
+
+h1 {
+  font-size: calc(3.5vw + 5px);
+  font-weight: 200;
+  text-align: center;
+}
+
+pre {
+  font-size: calc(0.5vw + 10px);
+  text-align: left;
+  white-space: pre-line;
+  line-height: calc(1.5vw + 10px);
+  position: relative;
+  font-family: Menlo;
+  margin-top: 5vh;
+}
+
+code {
+  font-size: calc(0.25vw + 10px);
+}
+
+u {
+  background: white;
+  color: #222;
+  text-decoration: none;
+  padding: 0 2vw;
+  position: relative;
+}
+u:after {
+  background: white;
+  opacity: 0.5;
+  top: 5px;
+  left: 5px;
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+ul, li {
+ line-height: calc(0.25vw + 10px);
+}
+
+body {
+  background-color: #222;
+  text-align: center;
+  margin: 0 auto;
+}
+body > main > * {
+  min-width: 300px;
+  width: 60vw;
+  max-width: 750vw;
 }
