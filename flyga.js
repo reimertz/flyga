@@ -1,4 +1,4 @@
-window.ghettoFetch = (() => {
+window.flyga = (() => {
 
 const pages = new Map()
 

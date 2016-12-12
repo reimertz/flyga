@@ -1,0 +1,25 @@
+{
+  "name": "flyga",
+  "version": "0.0.1",
+  "description": "prefetch on hover",
+  "main": "flyga.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reimertz/flyga.git"
+  },
+  "keywords": [
+    "prefetch",
+    "hover",
+    "fast",
+    "flyga"
+  ],
+  "author": "Pierre Reimertz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reimertz/flyga/issues"
+  },
+  "homepage": "https://github.com/reimertz/flyga#readme"
+}
