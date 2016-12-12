@@ -3,6 +3,8 @@ window.ghettoFetch = (() => {
 const pages = new Map()
 
 const fetchPage = url => {
+  if (pages.get(url)) return pages.get(url)
+
   return fetch(url)
     .then(response => { return response.text() })
     .then(htmlString => {
