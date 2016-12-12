@@ -2,7 +2,7 @@
 
 --- 
 
-✈️ prefetching made simple
+✈️ prefetching has never been simpler
 
 
 1. include flyga.js on all of your pages
