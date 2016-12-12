@@ -36,7 +36,16 @@ const addPage = (url, htmlString) => {
 const updatePage = url => {
   var main = document.querySelector('main')
 
-  pages.get(url).then(newMain => { main.replaceWith(newMain) })
+  pages.get(url).then(newMain => {
+    main.replaceWith(newMain)
+
+    Array.from(newMain.querySelectorAll('script')).map(script => {
+      const newScript = document.createElement('script')
+
+      newScript.innerHTML = script.innerHTML
+      script.replaceWith(newScript)
+    })
+  })
 }
 
 const updateHistory = url => {
@@ -71,14 +80,14 @@ const onClick = event => {
   else window.location = url
 }
 
-const onHistoryChange = () => { updatePage(location.href) }
+const onUserHistoryInteraction = () => { updatePage(location.href) }
 
 const listeners = (on) => {
   const func = `${ on ? `add` : `remove`}EventListener`
 
   document[func]('mouseover', onHover)
   document[func]('click', onClick)
-  window[func]('popstate', onHistoryChange)
+  window[func]('popstate', onUserHistoryInteraction)
 }
 
 return {
