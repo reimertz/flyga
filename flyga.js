@@ -1,6 +1,11 @@
 window.flyga = (() => {
 
 const pages = new Map()
+const defaults = {
+  selector: 'main'
+}
+
+let options
 
 const fetchPage = url => {
   if (pages.get(url)) return pages.get(url)
@@ -23,23 +28,23 @@ const prefetchImages = images => {
 
 const addPage = (url, htmlString) => {
   const container = document.createElement('div')
-  let newMain
+  let newContainer
 
   container.innerHTML = htmlString
-  newMain = container.querySelector('main')
+  newContainer = container.querySelector(options.selector)
 
-  pages.set(url, Promise.resolve(newMain))
+  pages.set(url, Promise.resolve(newContainer))
 
-  prefetchImages(Array.from(newMain.querySelectorAll('img')))
+  prefetchImages(Array.from(newContainer.querySelectorAll('img')))
 }
 
 const updatePage = url => {
-  var main = document.querySelector('main')
+  var container = document.querySelector(options.selector)
 
-  pages.get(url).then(newMain => {
-    main.replaceWith(newMain)
+  pages.get(url).then(newContainer => {
+    container.replaceWith(newContainer)
 
-    Array.from(newMain.querySelectorAll('script')).map(script => {
+    Array.from(newContainer.querySelectorAll('script')).map(script => {
       const newScript = document.createElement('script')
 
       newScript.innerHTML = script.innerHTML
@@ -91,7 +96,9 @@ const listeners = (on) => {
 }
 
 return {
-  init: (options) => {
+  init: (opts) => {
+    options = Object.assign(defaults, opts)
+
     addPage(location.href, document.body.innerHTML)
     listeners(true)
   },
