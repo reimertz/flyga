@@ -21,7 +21,7 @@
     3. done
 
     <u>it's also very small, just ~100 loc.</u>
-    
+
     <u><a href="https://github.com/reimertz/flyga">github</a></u>
 
   </pre>
@@ -29,6 +29,9 @@
 
 <script src="flyga.js"></script>
 <script>
-  flyga.init()
+  flyga.init({
+    selector: 'main',
+    nrOfImagesToPrefetch: 2
+  })
 </script>
 

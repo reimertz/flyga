@@ -1,9 +1,10 @@
 window.flyga = (() => {
 
-const pages = new Map()
-const defaults = {
-  selector: 'main'
-}
+const pages = new Map(),
+      defaults = {
+        selector: 'main',
+        nrOfImagesToPrefetch: 10
+      }
 
 let options
 
@@ -18,7 +19,7 @@ const fetchPage = url => {
 }
 
 const prefetchImages = images => {
-  images.map(img => {
+  images.splice(0, options.nrOfImagesToPrefetch).map(img => {
     document.head.appendChild(Object.assign(document.createElement('link'), {
       rel: 'prefetch',
       href: img.src
@@ -63,11 +64,13 @@ const updateHistory = url => {
 const onHover = event => {
   var url = event.srcElement.href
 
-  if (event.srcElement.nodeName !== 'A') return
-  else if (url.indexOf(location.hostname) === -1) return
-  else if (pages.get(url)) return
-  else fetchPage(url)
+  if (
+    event.srcElement.nodeName !== 'A' ||
+    url.indexOf(location.hostname) === -1 ||
+    pages.get(url)
+  ) return
 
+  else fetchPage(url)
 }
 
 const onClick = event => {
@@ -76,12 +79,10 @@ const onClick = event => {
   event.preventDefault()
 
   if (event.srcElement.nodeName !== 'A') return
-  else if (url.indexOf(location.hostname) >= 0) {
-    fetchPage(url).then(() => {
+  if (url.indexOf(location.hostname) >= 0) return fetchPage(url).then(() => {
       updatePage(url)
       updateHistory(url)
     })
-  }
   else window.location = url
 }
 
